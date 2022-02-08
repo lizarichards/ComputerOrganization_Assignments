@@ -1,0 +1,70 @@
+Question 4:
+
+	a.) 0x000000C6 = 198
+		1. convert hex to binary: 11000110
+		2. identify the sign bit as 1 or 0, in this case it is 0 so greatest bit is positive
+		3. multiply each digit of binary with 2 to the power of the digit location
+		and the greates bit is (2^7)
+			-> (2^7) + (2^6) + (2^2) + (2^1) = 198
+	b.) 0xFFFFFEC4 = -316
+		1. convert hex to binary: 11111111111111111111111011000100
+		2. identify the sign bit: in this case it's 1 so greatest bit is negative 
+		3. multiply each digit of binary with 2 to the power of the digit location and add up				(-1)*2^31 + 2^30+...+ 2^9 + 2^7 + 2^6 + 2^2 = -316
+
+		
+	c.) 0xFFFFFFFF = -1 
+		1. convert hex to binary: 11111111111111111111111111111111
+		2. identify the sign but: in this case it's 1 so greatest bit is negative
+		3. multiply each digit of binary with 2 to the power of the digit location and add up				 (-1)*2^31 + 2^30 + 2^29 +...+ 2^2 + 2^1 + 2^0 = -1
+
+Question 5:
+
+	a.) 0x80000000 = -0.0
+		1. convert to binary: 10000000...000
+		2. separate into sign bit, exponent, and fraction: 1  00000000 000000...0000
+		3. find the bias using the exponent to get E: 0-127 = -127
+		4. find the fraction (M): 0.0
+		5 identify sign bit: 1 therefore negative value
+		5. put it all together: (-1)^s * M * (2^E) = -1 * 0.0 * 2^-127 = -0.0
+	b.) 0x3FC00000 = 1.5
+		1. convert to binary: 0011111111000000...0000
+		2. separate into sign bit, exponent, and fraction: 0 01111111 100000...0000
+		3. find the bias using exponent to get E: 127-127 = 0
+		4. find the fraction (M): 1.1000 = 1.5 (2^-1) + 1
+		5. identify the sign bit: 0 therefore positive value
+		6. put it all together: (-1)^0 *1.5 *2^0 = 1.5
+	c.) 0xC1340000 = -11.25
+		1. convert to binary: 1100000100110100...0000
+		2. separate into sign bit, exponent, and fraction: 1 10000010 0110100...0000
+		3. find the bias using the exponent to get E: 130-127 = 3
+		4. find the fraction (M): 1.0110100 = 1.40625 (add together 2^-2, 2^-3, 2^-5 and 1)
+		5. identify the sign bit: 1 so negative value
+		6. put it all together (-1)^1 * 1.40625 * (2^3) = -11.25
+
+Question 6: 
+
+	a.) 1.0 = 0x3F800000
+		1. convert decimal to binary: 1 = 0001 .0 = 0000 -> 00010000...
+		2. normalize (move decimal over): 1.0 * 2^0
+		3. find exponent using how many times decimal moved over: 0 + 127 = 127 = 011111111
+		4. find fraction: 00000...0000
+		5. identidy sign bit: positive number so 0
+		6. put it all together: 0011111110000000...0000
+		7 change to hex: 0x3F800000
+	b.) 16.5 = 0x41840000
+		1. covert decimal to binary: 16 = 10000, .5 = .1 -> 10000.1
+		2. normalize (move decimal over): 1.00001 * 2^4
+		3. find exponent using how many times decimal moved over = 4 + 127 = 131 = 10000011
+		4. find fraction: .00001 = 00001000...0000
+		5. identify the sign bit: positive number so 0
+		6. put it all together:  01000001100001000...0000
+		7. change to hex: 0x41840000
+	c.) -314.75 = 0xC39D6000
+		1. covert decimal to binary: 314 = 100111010, .75 = .11 -> 100111010.11
+		2. normalize (move decimal over): 1.0011101011 * 2^8
+		3. find exponent using how many times decimal moved over = 8 + 127 = 135 = 10000111
+		4. find fraction: .0011101011 = 0011101011...0000
+		5. identify the sign bit: positive number so 1
+		6. put it all together:  11000011100111010110000...0000
+		7. change to hex: 0xC39D6000
+

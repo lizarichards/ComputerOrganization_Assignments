@@ -1,0 +1,19 @@
+	    iaddq rA, rB
+
+Fetch:      icode:ifun <- M1[PC] //instruction code and instruction function
+	    rA:rB <- M1[PC + 1] // stores rA and rB in memory (1 byte), increments PC
+	    valC <- M8[PC + 2] // stores value of constant in mem (8 bytes)
+	    valP <- PC + 10 // increments PC
+
+Decode:     valB <- R[rB] // read operand B 
+
+Execute:    valE <- valB + valC // add constant to value in rB
+	    set CC
+
+Memory:  
+
+Write back: R[rB] <- valE // stores result of valB + valC (val E) into register B
+
+PC update:  PC <- valP // increment program counter
+
+

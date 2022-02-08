@@ -1,0 +1,73 @@
+// Question 1:
+//
+
+// execution begins at address 0
+	.pos 0
+	irmovq stack, %rsp // setup stack pointer
+	call main // execute main
+	halt // terminate program 
+	
+// array of 10 elements
+array: 
+	.quad 0x5
+	.quad 0x2
+	.quad 0x3
+	.quad 0x4
+	.quad 0x9
+	.quad 0x10
+	.quad 0x1
+	.quad 0x6
+	.quad 0x8
+	.quad 0x7
+
+main: 
+	irmovq array, %rcx // array
+	irmovq $10, %rdx // array length
+	call sort // sort(array, 10)
+	ret
+
+sort:
+
+loop1:
+	rrmovq %rcx, %r8
+	rrmovq %rcx, %rdi // array in rdi
+	rrmovq %rdx, %r9 // length array
+	// goes through loop as many times as length of array
+	
+loop2:
+	// inner loop
+	irmovq $8, %r10
+	addq %r10, %r8 // increment
+	mrmovq (%rdi), %r11 // min
+	mrmovq (%r8), %r12 // current j
+	// stored values before to not change original values
+	subq %r11, %r12 // cmpq
+	cmovl %r8, %rdi // if r8 less than current min, move r8 to min
+	irmovq $1, %r13 // increment j
+	subq %r13, %r9 // change remaining len array
+	andq %r9, %r9 // if len != current j, run loop
+	jne loop2 // if not equal then run loop again
+	call swap
+
+	//outer loop
+	addq %r10, %rcx // increment i
+	subq %r13, %rdx // cmpq
+	//as long as i != len array
+	jne loop1
+	ret
+
+
+swap:
+	mrmovq (%rdi), %r8
+	mrmovq (%rcx), %r9
+	rmmovq %r9, (%rdi)
+	rmmovq %r8, (%rcx)
+	ret
+
+// stack starts here and grows to lower addresses
+	.pos 0x200
+stack:	
+
+	
+		
+	
